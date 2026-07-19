@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Od želje do zalogaja — scroll demo digitalnog naručivanja. McDonald's Hrvatska koncept." />
+  <title>Od želje do zalogaja — scroll demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Figtree = besplatna zamjena za licencirani Speedee (vidi BRAND.md); fallback system-ui radi i offline -->
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;700;800&display=swap" rel="stylesheet" />
+</head>
+<body class="no-motion">
+  <a class="skip-link" href="#cta">Preskoči na preuzimanje aplikacije</a>
+
+  <!-- Traka narudžbe: raste sa scrollom kao košarica u aplikaciji -->
+  <div class="order-rail" id="orderRail" aria-live="polite">
+    <svg class="rail-arches" viewBox="0 0 100 78" aria-hidden="true"><path fill="#FFBC0D" d="M 4 78 C 4 26 14.5 2 29 2 C 41 2 48.5 22 50 40 C 51.5 22 59 2 71 2 C 85.5 2 96 26 96 78 L 82 78 C 82 34 77.5 15 71 15 C 63.5 15 58.5 38 58 78 L 42 78 C 41.5 38 36.5 15 29 15 C 22.5 15 18 34 18 78 Z"/></svg>
+    <span class="rail-item" id="railItem">Big Mac</span>
+    <span class="rail-points" id="railPoints">5,95 € · 446 bodova</span>
+  </div>
+
+  <!-- FAZA 0: HERO -->
+  <section class="phase hero" id="hero" aria-label="Uvod — gladan si">
+    <svg class="hero-arches" viewBox="0 0 100 78" aria-hidden="true"><path fill="#FFBC0D" d="M 4 78 C 4 26 14.5 2 29 2 C 41 2 48.5 22 50 40 C 51.5 22 59 2 71 2 C 85.5 2 96 26 96 78 L 82 78 C 82 34 77.5 15 71 15 C 63.5 15 58.5 38 58 78 L 42 78 C 41.5 38 36.5 15 29 15 C 22.5 15 18 34 18 78 Z"/></svg>
+    <div class="hero-inner">
+      <h1 class="split" id="heroTitle">Gladan si. Skrolaj.</h1>
+      <p class="lead">Od želje do zalogaja — bez čekanja u redu.</p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- FAZE 1–3: SLAGANJE BURGERA (pinned stage) -->
+  <section class="phase build" id="build" aria-label="Slaganje narudžbe scrollom">
+    <div class="stage" id="stage">
+      <div class="phone" id="phone">
+        <svg class="burger" id="burgerSvg" viewBox="0 0 300 250" aria-label="Big Mac se slaže sloj po sloj" role="img">
+          <defs>
+            <linearGradient id="gBun" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F7B565"/><stop offset="1" stop-color="#E08E3C"/>
+            </linearGradient>
+            <linearGradient id="gPatty" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#8A5426"/><stop offset="1" stop-color="#6B3E19"/>
+            </linearGradient>
+          </defs>
+          <!-- PLACEHOLDER: proceduralni plošni burger — produkcija bi ubacila službene ilustracije -->
+          <g id="layer-bun-bottom">
+            <path fill="url(#gBun)" d="M55 208 h190 a0 0 0 0 1 0 0 v10 a14 14 0 0 1 -14 14 h-162 a14 14 0 0 1 -14 -14 z"/>
+          </g>
+          <g id="layer-patty">
+            <rect x="45" y="182" width="210" height="30" rx="15" fill="url(#gPatty)"/>
+            <ellipse cx="90" cy="189" rx="10" ry="3" fill="#9A6230" opacity=".6"/>
+            <ellipse cx="170" cy="192" rx="12" ry="3" fill="#9A6230" opacity=".6"/>
+            <ellipse cx="225" cy="188" rx="8" ry="3" fill="#9A6230" opacity=".6"/>
+          </g>
+          <g id="layer-cheese">
+            <path fill="#FFC844" d="M62 168 h176 l-8 22 h-160 z"/>
+            <path fill="#F5B82E" d="M108 190 l-7 14 -9 -14 z"/>
+            <path fill="#F5B82E" d="M196 190 l8 12 8 -12 z"/>
+          </g>
+          <g id="layer-lettuce">
+            <path fill="#7FBC42" d="M50 158 q12 -14 25 0 q12 -14 25 0 q12 -14 25 0 q12 -14 25 0 q12 -14 25 0 q12 -14 25 0 q12 -14 25 0 q12 -14 25 0 v14 q-100 10 -200 0 z"/>
+          </g>
+          <g id="layer-onion">
+            <path fill="none" stroke="#F6EDD9" stroke-width="6" stroke-linecap="round" d="M80 150 q20 -10 42 0 M130 148 q20 -10 42 0 M180 150 q20 -10 42 0"/>
+          </g>
+          <g id="layer-sauce">
+            <path fill="#DA291C" d="M65 140 q10 12 22 2 q10 12 22 2 q10 12 22 2 q10 12 22 2 q10 12 22 2 q10 12 22 2 q10 12 22 2 l6 -12 h-166 z" opacity=".95"/>
+          </g>
+          <g id="layer-bun-top">
+            <path fill="url(#gBun)" d="M150 42 c-62 0 -96 34 -98 88 q98 12 196 0 c-2 -54 -36 -88 -98 -88 z"/>
+            <g fill="#FFF3DC" opacity=".9">
+              <ellipse cx="105" cy="78" rx="6" ry="4" transform="rotate(-18 105 78)"/>
+              <ellipse cx="150" cy="64" rx="6" ry="4"/>
+              <ellipse cx="196" cy="78" rx="6" ry="4" transform="rotate(18 196 78)"/>
+              <ellipse cx="126" cy="100" rx="6" ry="4" transform="rotate(10 126 100)"/>
+              <ellipse cx="176" cy="100" rx="6" ry="4" transform="rotate(-10 176 100)"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="copy-slot">
+        <div class="copy" id="copy1">
+          <h2>Otvori. Poželi. Naruči.</h2>
+          <p>Sve što vidiš, složit ćeš scrollom — točno ovako radi i aplikacija.</p>
+        </div>
+        <div class="copy" id="copy2">
+          <h2>Svaki zalogaj počinje izborom.</h2>
+          <p>Big Mac, McChicken ili nešto novo — 49 restorana u 18 gradova radi po istoj narudžbi.</p>
+        </div>
+        <div class="copy" id="copy3">
+          <h2>Složeno. Kao da si u kuhinji.</h2>
+          <p>Tvoja narudžba ide ravno na ekran kuhinje — bez papirića, bez pogreške.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAZA 4: BODOVI I PLAĆANJE -->
+  <section class="phase points" id="points" aria-label="Bodovi i plaćanje">
+    <div class="points-inner">
+      <h2>1 € = 75 bodova. Svaki put.</h2>
+      <div class="counter-wrap" aria-hidden="true">
+        <span class="counter" id="counter">446</span>
+        <span class="counter-label">bodova za ovu narudžbu</span>
+      </div>
+      <p>Bodove mijenjaš za kavu, krumpiriće ili cijeli McMenu — vjernost se ovdje broji.</p>
+      <div class="pay-btn" id="payBtn" aria-hidden="true">
+        <span class="pay-fill" id="payFill"></span>
+        <span class="pay-text">Plaćeno · 5,95 €</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAZA 5: PREUZIMANJE -->
+  <section class="phase pickup" id="pickup" aria-label="Načini preuzimanja narudžbe">
+    <div class="pickup-head">
+      <h2>Za stolom. Na pultu. Na McDriveu.</h2>
+      <p>Ili ti je donesemo — McDelivery vozi i kad pada kiša.</p>
+    </div>
+    <div class="pickup-scroller" id="pickupScroller" role="list">
+      <div class="pickup-card" role="listitem">
+        <span class="pickup-emoji" aria-hidden="true">🪑</span>
+        <h3>Za stolom</h3>
+        <p>Sjedni — narudžbu ti donosimo na broj stolića.</p>
+      </div>
+      <div class="pickup-card" role="listitem">
+        <span class="pickup-emoji" aria-hidden="true">🛎️</span>
+        <h3>Na pultu</h3>
+        <p>Ime ti se pojavi na ekranu čim je spremno.</p>
+      </div>
+      <div class="pickup-card" role="listitem">
+        <span class="pickup-emoji" aria-hidden="true">🚗</span>
+        <h3>Na McDriveu</h3>
+        <p>Samo reci kôd narudžbe — bez čekanja na traci.</p>
+      </div>
+      <div class="pickup-card" role="listitem">
+        <span class="pickup-emoji" aria-hidden="true">🅿️</span>
+        <h3>Na parkingu</h3>
+        <p>Parkiraj se, mi donosimo do auta.</p>
+      </div>
+    </div>
+    <p class="pickup-hint" aria-hidden="true">← povuci →</p>
+  </section>
+
+  <!-- FAZA 6: CTA -->
+  <section class="phase cta" id="cta" aria-label="Preuzmi aplikaciju">
+    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="cta-inner">
+      <svg class="bag" viewBox="0 0 120 140" aria-hidden="true">
+        <path fill="#C8935B" d="M14 40 h92 l-8 92 a10 10 0 0 1 -10 9 H32 a10 10 0 0 1 -10 -9 z"/>
+        <path fill="#B37F49" d="M14 40 h92 l-2 22 H16 z"/>
+        <path fill="none" stroke="#8a5f33" stroke-width="5" stroke-linecap="round" d="M42 40 v-12 a18 18 0 0 1 36 0 v12"/>
+        <g transform="translate(38,66) scale(0.44)"><path fill="#FFBC0D" d="M 4 78 C 4 26 14.5 2 29 2 C 41 2 48.5 22 50 40 C 51.5 22 59 2 71 2 C 85.5 2 96 26 96 78 L 82 78 C 82 34 77.5 15 71 15 C 63.5 15 58.5 38 58 78 L 42 78 C 41.5 38 36.5 15 29 15 C 22.5 15 18 34 18 78 Z"/></g>
+      </svg>
+      <h2 class="split" id="ctaTitle">Trideset godina. Jedan scroll.</h2>
+      <p>Od Jurišićeve 1996. do tvojeg džepa danas — preuzmi aplikaciju i naruči prvi obrok.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="https://www.mcdonalds.com/hr/hr-hr/aplikacija.html">Preuzmi aplikaciju</a>
+        <a class="btn btn-ghost" href="https://www.mcdonalds.com/hr/hr-hr.html">Pogledaj ponudu</a>
+      </div>
+    </div>
+    <footer class="facts">
+      <p>49 restorana · 18 gradova · 450+ milijuna gostiju · od 1996.</p>
+      <p class="fine">Demo koncept — nije službena stranica McDonald's Hrvatska. Izvori činjenica u BRAND.md.</p>
+    </footer>
+  </section>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+/* ============ Od želje do zalogaja — mobile first ============ */
+:root {
+  --gold: #ffbc0d;
+  --red: #da291c;
+  --ink: #1d1d1b;
+  --ink-2: #262624;
+  --paper: #fff8ef;
+  --white: #ffffff;
+  /* skupi efekti idu preko CSS varijabli na wrapperima */
+  --stage-glow: 0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 { font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; }
+h1 { font-size: clamp(2.4rem, 11vw, 5.5rem); }
+h2 { font-size: clamp(1.7rem, 7.5vw, 3.6rem); }
+p  { font-size: clamp(1rem, 4.2vw, 1.25rem); max-width: 34ch; }
+
+.skip-link {
+  position: fixed; top: -100px; left: 1rem; z-index: 99;
+  background: var(--gold); color: var(--ink);
+  padding: .7rem 1.1rem; border-radius: 999px;
+  font-weight: 700; text-decoration: none;
+  transition: top .2s;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- traka narudžbe ---------- */
+.order-rail {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; align-items: center; gap: .6rem;
+  padding: .65rem 1rem;
+  background: color-mix(in srgb, var(--ink) 82%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 188, 13, .25);
+  font-size: .9rem;
+  transform: translateY(-110%);
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+}
+body.rail-on .order-rail { transform: translateY(0); }
+.rail-arches { width: 22px; height: 17px; flex: none; }
+.rail-item { font-weight: 700; }
+.rail-points { margin-left: auto; color: var(--gold); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ---------- faze ---------- */
+.phase { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 1.5rem; }
+
+/* FAZA 0: hero */
+.hero { align-items: flex-start; overflow: hidden; }
+.hero-arches {
+  position: absolute; top: -12%; right: -28%;
+  width: 130vw; max-width: 900px; opacity: .22;
+  pointer-events: none;
+}
+.hero-inner { position: relative; }
+.hero .lead { margin-top: 1rem; color: var(--paper); opacity: .85; }
+.split .word { display: inline-block; white-space: pre; }
+
+.scroll-hint {
+  position: absolute; bottom: 1.6rem; left: 50%; translate: -50% 0;
+  width: 26px; height: 44px; border: 2px solid rgba(255,255,255,.5); border-radius: 999px;
+}
+.scroll-hint span {
+  position: absolute; top: 7px; left: 50%; translate: -50% 0;
+  width: 4px; height: 10px; border-radius: 999px; background: var(--gold);
+  animation: hint 1.6s ease-in-out infinite;
+}
+@keyframes hint { 50% { transform: translateY(14px); opacity: .3; } }
+
+/* FAZE 1–3: pinned stage */
+.build { padding: 0; }
+.stage {
+  height: 100svh; width: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1rem; padding: 4.2rem 1.25rem 1.25rem;
+}
+.phone {
+  width: min(72vw, 340px);
+  aspect-ratio: 300 / 250;
+  border: 2px solid rgba(255,255,255,.18);
+  border-radius: 24px;
+  padding: 4%;
+  background:
+    radial-gradient(120% 90% at 50% 10%, rgba(255,188,13, calc(var(--stage-glow) * .14)), transparent 60%),
+    var(--ink-2);
+}
+.burger { width: 100%; height: 100%; overflow: visible; }
+
+.copy-slot { position: relative; width: 100%; max-width: 420px; min-height: 11rem; }
+.copy { position: absolute; inset: 0; }
+.copy h2 { margin-bottom: .5rem; }
+.copy p { opacity: .85; }
+
+/* FAZA 4: bodovi */
+.points { align-items: center; text-align: center; gap: 1.2rem; }
+.points p { opacity: .85; }
+.counter-wrap { display: flex; flex-direction: column; align-items: center; }
+.counter {
+  font-size: clamp(4.5rem, 26vw, 10rem);
+  font-weight: 800; color: var(--gold);
+  font-variant-numeric: tabular-nums; line-height: 1;
+}
+.counter-label { opacity: .6; font-size: .95rem; margin-top: .2rem; }
+.pay-btn {
+  position: relative; overflow: hidden;
+  border: 2px solid var(--gold); border-radius: 999px;
+  padding: .9rem 2.4rem; font-weight: 700; font-size: 1.05rem;
+  margin-top: .4rem;
+}
+.pay-fill {
+  position: absolute; inset: 0; background: var(--gold);
+  transform-origin: left; transform: scaleX(0);
+}
+.pay-text { position: relative; color: var(--white); transition: color .2s; }
+.pay-btn.paid .pay-text { color: var(--ink); }
+.no-motion .pay-btn .pay-text { color: var(--ink); }
+
+/* FAZA 5: preuzimanje — native swipe */
+.pickup { padding-inline: 0; gap: 1.4rem; }
+.pickup-head { padding-inline: 1.5rem; }
+.pickup-head p { opacity: .85; margin-top: .5rem; }
+.pickup-scroller {
+  display: flex; gap: .9rem;
+  overflow-x: auto; padding: .5rem 1.5rem 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.pickup-scroller::-webkit-scrollbar { display: none; }
+.pickup-card {
+  flex: 0 0 72%;
+  scroll-snap-align: center;
+  background: var(--ink-2);
+  border: 1px solid rgba(255,188,13,.25);
+  border-radius: 20px;
+  padding: 1.4rem;
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.pickup-emoji { font-size: 2.4rem; }
+.pickup-card h3 { font-size: 1.3rem; color: var(--gold); }
+.pickup-card p { font-size: .98rem; opacity: .85; }
+.pickup-hint { text-align: center; opacity: .45; font-size: .85rem; }
+
+/* FAZA 6: CTA */
+.cta { align-items: center; text-align: center; overflow: hidden; padding-bottom: 0; }
+.cta-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(80% 55% at 50% 62%, rgba(255,188,13,.28), transparent 70%);
+  pointer-events: none;
+}
+.cta-inner { position: relative; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.bag { width: min(34vw, 150px); filter: drop-shadow(0 12px 30px rgba(255,188,13,.35)); }
+.cta p { opacity: .9; }
+.cta-actions { display: flex; flex-direction: column; gap: .7rem; margin-top: .6rem; width: 100%; max-width: 320px; }
+.btn {
+  display: block; text-align: center; text-decoration: none;
+  padding: .95rem 1.6rem; border-radius: 999px; font-weight: 700; font-size: 1.05rem;
+}
+.btn-primary { background: var(--gold); color: var(--ink); }
+.btn-primary:active { transform: scale(.97); }
+.btn-ghost { border: 2px solid rgba(255,255,255,.45); color: var(--white); }
+
+.facts { position: relative; margin-top: 3.5rem; padding: 1.4rem; text-align: center; border-top: 1px solid rgba(255,255,255,.12); width: 100%; }
+.facts p { max-width: none; font-size: .92rem; opacity: .75; }
+.facts .fine { font-size: .78rem; opacity: .45; margin-top: .3rem; }
+
+/* ---------- desktop ---------- */
+@media (min-width: 768px) {
+  .phase { padding: 3rem; }
+  .hero { align-items: center; text-align: center; }
+  .hero .lead { margin-inline: auto; }
+  .stage { flex-direction: row; justify-content: center; gap: 4rem; }
+  .copy-slot { max-width: 380px; text-align: left; }
+  .pickup-scroller { justify-content: center; overflow-x: visible; flex-wrap: wrap; padding-inline: 3rem; }
+  .pickup-card { flex: 0 1 240px; }
+  .pickup-hint { display: none; }
+  .cta-actions { flex-direction: row; justify-content: center; max-width: none; width: auto; }
+}
+
+/* ---------- bez JS-a / reduced motion: sve vidljivo i čitljivo ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scroll-hint span { animation: none; }
+}
+.no-motion .order-rail { transform: none; }
+.no-motion .copy { position: static; margin-bottom: 1.6rem; }
+.no-motion .copy-slot { min-height: 0; }
+.no-motion .stage { height: auto; padding-top: 5rem; }
+.no-motion .pay-fill { transform: scaleX(1); }
