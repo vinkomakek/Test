@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 78" role="img" aria-label="Zlatni lukovi">
+  <!-- PLACEHOLDER: proceduralna rekonstrukcija zlatnih lukova, nije službeni asset -->
+  <path fill="#FFBC0D" d="
+    M 4 78
+    C 4 26 14.5 2 29 2
+    C 41 2 48.5 22 50 40
+    C 51.5 22 59 2 71 2
+    C 85.5 2 96 26 96 78
+    L 82 78
+    C 82 34 77.5 15 71 15
+    C 63.5 15 58.5 38 58 78
+    L 42 78
+    C 41.5 38 36.5 15 29 15
+    C 22.5 15 18 34 18 78
+    Z"/>
+</svg>
